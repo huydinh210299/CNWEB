@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/css/aution.css" />
+<div class="container mt-3">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+      <li class="breadcrumb-item"><a href="#">Điện thoại</a></li>
+      <li class="breadcrumb-item active" aria-current="page">iPhone 12</li>
+    </ol>
+  </nav>
+  <h1 class="text text-center">Thông tin sản phẩm</h1>
+  <div class="card bg-light">
+    <div class="container-fliud">
+      <div class="wrapper row">
+        <div class="preview col-md-6">
+
+          <div class="preview-pic tab-content" style="height: 350px;">
+            {{#each product.image}}
+              <div class="tab-pane {{isActive @key}}" id="pic-{{@key}}" style="height: 100%;"><img src="/upload/product/{{this}}" style="height: 100%;"/></div>
+            {{/each}}
+          </div>
+          <ul class="preview-thumbnail nav nav-tabs" style="height: 55px;">
+            {{#each product.image}}
+              <li class="{{isActive @key}}" style="height: 100%;"><a data-target="#pic-{{@key}}" data-toggle="tab" style="height: 100%;"><img src="/upload/product/{{this}}" style="height: 100%;"/></a></li>
+            {{/each}}
+          </ul>
+
+        </div>
+        <div class="details col-md-6 d-flex flex-column justify-content-between">
+          <div class="conten-wrapper">
+            <h3 class="product-title">{{product.title}}</h3>
+            <h4 class="price">Giá bán: <span>{{product.price}}đ</span></h4>
+            <p class="product-description">{{product.description}}</p>
+            <p class="area">Khu vực: {{product.user.area}}</p>
+            <p class="address">Địa chỉ bán: {{product.user.address}}</p>
+            <p class="quantity">Số lượng: {{product.quantity}}</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <a class="btn btn-primary px-3 py-2" href="#">Mua ngay</a>
+            <a class="btn btn-danger px-3 py-2" href="/product/auction">Đấu giá sản phẩm</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

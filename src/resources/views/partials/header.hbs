@@ -1,0 +1,30 @@
+<div class="container-fuild d-flex justify-content-center py-4" style="background-color: #f7f7f7; align-items: center;">
+  <a href="/">
+    <div class="logo">
+      <img src="/image/icon-cart.png" width="64" height="64" />
+      <div class="brand-name">Fast Buy</div>
+    </div>
+  </a>
+  <input class="searchbar" type="text" placeholder="Tìm sản phẩm" aria-label="Search">
+  <nav class="navbar navbar-expand bg-light">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        {{#if login}}
+          <li class="nav-item"><a class="hoverable nav-link" href="/product/create">Đăng bán</a></li>
+          <li class="nav-item dropdown hoverable">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Tài khoản
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/user/profile">Hồ sơ</a>
+              <a class="dropdown-item" href="/user/logout">Đăng xuất</a>
+            </div>
+          </li>
+        {{else}}
+          <li class="nav-item"><a class="hoverable nav-link" href="/user/login">Login</a></li>
+          <li class="nav-item"><a class="hoverable nav-link" href="/user/register">Sign up</a></li>
+        {{/if}}
+      </ul>
+    </div>
+  </nav>
+</div>

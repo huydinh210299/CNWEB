@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/login.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <form class="box">
+                        <h1>Login</h1>
+                        <p class="text-muted"> Please enter your login and password!</p> 
+                        <input type="text" name="username" placeholder="Username" required> 
+                        <input type="password" name="password" placeholder="Password" required>
+                        <a class="forgot text-muted" href="/user/register">Dont have acount?
+                            Register?</a> <input type="submit" name="" value="Login" href="#">
+                        <div class="col-md-12">
+                            <ul class="social-network social-circle">
+                                <li><a href="#" class="icoFacebook" title="Facebook"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li><a href="#" class="icoGoogle" title="Google +"><i
+                                            class="fab fa-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            //get data
+            const username = form.username.value;
+            const password = form.password.value;
+            try {
+                const res = await fetch('/user/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ username, password }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (res.status == 400) {
+                    $('.err-msg').text("Đăng nhập thất bại. Kiểm tra lại thông tin");
+                }
+                else {
+                    window.location.replace("/");
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        })
+    </script>
+</body>
+
+</html>

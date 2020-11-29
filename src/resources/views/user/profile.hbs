@@ -1,0 +1,225 @@
+<div class="container bootstrap snippet mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group" style="height: 100%; background-color: #fff;">
+                <a href="/user/profile" class="list-group-item list-group-item-action active">Thông tin cá nhân</a>
+                <a href="/user/dashboard" class="list-group-item list-group-item-action">Thống kê hoạt động</a>
+                <a href="/user/buyed" class="list-group-item list-group-item-action">Các sản phẩm đã mua</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row bg-light p-3">
+                <div class="col-sm-10">
+                    <h1 class="fullname" style="font-family: cursive">{{user.fullname}}</h1>
+                </div>
+                <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image"
+                            class="img-circle img-responsive"
+                            src="/upload/avatar/{{user.avata}}" style="height: 100px;"></a></div>
+            </div>
+            <div class="row row bg-light p-3 mt-3">
+                <div class="col-sm-4">
+                    <!--left col-->
+                    <div class="text-center">
+                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                            class="avatar img-circle img-thumbnail mb-3" alt="avatar">
+                        <h6>Upload a different photo...</h6>
+                        <input type="file" class="text-center center-block file-upload">
+                    </div>
+                    </hr><br>
+
+                    <ul class="list-group">
+                        <li class="list-group-item text-muted">Thống kê hoạt động <i class="fa fa-dashboard fa-1x"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="pull-left"><strong>SP đã
+                                    bán </strong></span>
+                            125</li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="pull-left"><strong>SP
+                                    đang bán </strong></span> 13
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="pull-left"><strong>SP đã
+                                    mua </strong></span> 37
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="pull-left"><strong>SP đã
+                                    đấu giá </strong></span>
+                            78</li>
+                    </ul>
+
+
+                </div>
+                <!--/col-3-->
+                <div class="col-sm-8">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item"><a data-toggle="tab" class="nav-link active" role="tab"
+                                href="#profile">Home</a></li>
+                        <li class="nav-item"><a data-toggle="tab" class="nav-link" role="tab"
+                                href="#password">Password</a></li>
+                        <li class="nav-item"><a data-toggle="tab" class="nav-link" role="tab"
+                                href="#description">Description</a></li>
+                    </ul>
+
+                    <div class="tab-content mt-3">
+                        <div class="tab-pane fade active show" role="tabpanel" id="profile">
+                            <form class="form" action="##" method="post" id="form-info">
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <label for="full_name">
+                                            <h4>Tên: </h4>
+                                        </label>
+                                        <input type="text" value="{{user.fullname}}" class="form-control"
+                                            name="full_name" id="full_name" placeholder="Nhập vào tên của bạn."
+                                            title="Nhập vào tên của bạn.">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-xs-6">
+                                        <label for="gender">
+                                            <h4>Giới tính:</h4>
+                                        </label>
+                                        <select class="form-control" name="gender">
+                                            {{#equal user.gender "male"}}
+                                            <option value="male" selected>Nam</option>
+                                            <option value="female">Nữ</option>
+                                            {{/equal}}
+                                            {{#notequal user.gender "male"}}
+                                            <option value="male">Nam</option>
+                                            <option value="female" selected>Nữ</option>
+                                            {{/notequal}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-xs-6">
+                                        <label for="gender">
+                                            <h4>Khu vực:</h4>
+                                        </label>
+                                        <select class="form-control" name="area">
+                                            {{#each area}}
+                                                <option value="{{this}}" {{{isSelected this ../user.area}}}>{{this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <label for="phone">
+                                            <h4>Số điện thoại:</h4>
+                                        </label>
+                                        <input type="text" class="form-control" name="phone" id="phone"
+                                            placeholder="Nhập vào số điện thoại của bạn."
+                                            title="Nhập vào số điện thoại của bạn." value="{{user.phone}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-xs-12">
+                                        <label for="email">
+                                            <h4>Email:</h4>
+                                        </label>
+                                        <input type="email" class="form-control" name="email" id="email" value="{{user.email}}"
+                                            placeholder="Nhập vào email của bạn." title="Nhập vào email của bạn.">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <label for="address">
+                                            <h4>Địa chỉ:</h4>
+                                        </label>
+                                        <input type="text" class="form-control" name="address" id="address" value="{{user.address}}"
+                                            placeholder="Nhập vào địa chỉ của bạn" title="Nhập vào địa chỉ của bạn">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <br>
+                                        <button class="btn btn-lg btn-success" type="submit"><i
+                                                class="glyphicon glyphicon-ok-sign"></i> Lưu</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <hr>
+
+                        </div>
+                        <!--/tab-pane-->
+                        <div class="tab-pane fade" role="tabpanel" id="password">
+                            <form class="form" action="##" method="post" id="registrationForm">
+                                <div class="form-group">
+
+                                    <div class="col-xs-12">
+                                        <label for="password">
+                                            <h4>Mật khẩu mới</h4>
+                                        </label>
+                                        <input type="password" class="form-control" name="password" id="password"
+                                            placeholder="Nhập vào mật khẩu mới." title="Nhập vào mật khẩu mới.">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-xs-12">
+                                        <label for="password2">
+                                            <h4>Xác nhận lại mật khẩu</h4>
+                                        </label>
+                                        <input type="password" class="form-control" name="password2" id="password2"
+                                            placeholder="Nhập lại mật khẩu mới." title="Nhập lại mật khẩu mới.">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <br>
+                                        <button class="btn btn-lg btn-success pull-right" type="submit"><i
+                                                class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--/tab-pane-->
+                        <div class="tab-pane fade" role="tabpanel" id="description">
+                            <form class="form" action="##" method="post" id="description form">
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <label for="description">
+                                            <h4>Mô tả ngắn:</h4>
+                                        </label>
+                                        <textarea class="form-control" rows="10" id="comment">{{user.description}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <br>
+                                        <button class="btn btn-lg btn-success pull-right" type="submit"><i
+                                                class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--/tab-pane-->
+                </div>
+                <!--/tab-content-->
+            </div>
+            <!--/col-9-->
+        </div>
+        <!--/row-->
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+    });
+</script>

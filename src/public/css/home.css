@@ -1,0 +1,46 @@
+.quick-sort{
+    height: 70px;
+    background-color: #fff;
+    border-radius: 8px 8px 0 0;
+    margin: 0 2%;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.my-container-fuild{
+    width: 85vw !important;
+    margin: auto;
+}
+
+.list-product{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn-area, .btn-category{
+    background: #ECECEC;
+    color: #dd512a;
+    font-size:20px;
+}
+
+.modal-body{
+    max-height: 500px;
+    overflow-y: scroll;
+    padding: 0 !important;
+}
+
+.modal-body .list-area .area-item{
+    font-size: 18px;
+    padding: 8px 0;
+    padding-left: 20px;
+}
+
+.modal-body .list-area .area-item:hover{
+    background-color: aliceblue;
+}
+
+.modal-body .list-area{
+    list-style-type: none;
+    padding-left: 0px;
+}
