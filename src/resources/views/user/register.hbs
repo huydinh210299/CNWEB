@@ -25,7 +25,7 @@
 
             <!-- Registeration Form -->
             <div class="col-md-7 col-lg-6 ml-auto">
-                <form action="/user/register" method="POST" encType="multipart/form-data">
+                <form action="/user/register" method="POST" encType="multipart/form-data" id="form-register">
                 <div class="row">
                     {{#if data.success}}
                         <div class="col-md-12 text-success">{{data.success}}</div>
@@ -137,14 +137,14 @@
 
                         <div class="input-group mb-3 col-lg-12" style="height: 50px;">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="avata" id="inputFile" required>
+                                <input type="file" class="custom-file-input avata" name="avata" id="inputFile" required>
                                 <label class="custom-file-label" for="inputFile">Choose file</label>
                             </div>
                         </div>
 
                         <!-- Submit Button -->
                         <div class="form-group col-lg-12 mx-auto mb-0">
-                            <button class="font-weight-bold btn btn primary" type="submit">Create your account</button>
+                            <button class="font-weight-bold btn btn primary btn-submit" type="submit">Create your account</button>
                         </div>
 
                         <!-- Divider Text -->

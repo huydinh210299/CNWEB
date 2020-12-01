@@ -15,12 +15,14 @@
 
           <div class="preview-pic tab-content" style="height: 350px;">
             {{#each product.image}}
-              <div class="tab-pane {{isActive @key}}" id="pic-{{@key}}" style="height: 100%;"><img src="/upload/product/{{this}}" style="height: 100%;"/></div>
+            <div class="tab-pane {{isActive @key}}" id="pic-{{@key}}" style="height: 100%;"><img
+                src="/upload/product/{{this}}" style="height: 100%;" /></div>
             {{/each}}
           </div>
           <ul class="preview-thumbnail nav nav-tabs" style="height: 55px;">
             {{#each product.image}}
-              <li class="{{isActive @key}}" style="height: 100%;"><a data-target="#pic-{{@key}}" data-toggle="tab" style="height: 100%;"><img src="/upload/product/{{this}}" style="height: 100%;"/></a></li>
+            <li class="{{isActive @key}}" style="height: 100%;"><a data-target="#pic-{{@key}}" data-toggle="tab"
+                style="height: 100%;"><img src="/upload/product/{{this}}" style="height: 100%;width: 100%;" /></a></li>
             {{/each}}
           </ul>
 
@@ -35,11 +37,36 @@
             <p class="quantity">Số lượng: {{product.quantity}}</p>
           </div>
           <div class="d-flex justify-content-between">
-            <a class="btn btn-primary px-3 py-2" href="#">Mua ngay</a>
-            <a class="btn btn-danger px-3 py-2" href="/product/auction">Đấu giá sản phẩm</a>
+            <a class="btn btn-primary px-3 py-2 btn-buy" href="#">Mua ngay</a>
+            <a class="btn btn-danger px-3 py-2" href="/product/auction/{{product.slug}}">Đấu giá sản phẩm</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<form class="form-data" hidden>
+  <input class="product" value="{{product._id}}" />
+  <input class="seller" value="{{product.user._id}}" />
+</form>
+
+<script>
+  $(document).on('click', '.btn-buy', async (e) => {
+    const data = {
+      product: $('.product').val(),
+      seller: $('.seller').val()
+    }
+    var rs = await $.ajax({
+      type: "POST",
+      url: "/deal/buydeal",
+      contentType: "application/json",
+      data: JSON.stringify(data)
+    });
+    if (rs.success) {
+      alert(rs.success);
+    }
+    else {
+      alert(rs.error);
+    }
+  })
+</script>

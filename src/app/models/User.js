@@ -69,11 +69,23 @@ User.statics.login = async function(username, password){
     throw Error("incorrect username");
 }
 
-//quan hệ
+//quan hệ với product
 User.virtual('product',{
     ref : 'Product',
     localField: '_id',
     foreignField: 'user'
+})
+//quan hệ với deal
+User.virtual('deal',{
+    ref : 'Deal',
+    localField: '_id',
+    foreignField: 'buyer'
+})
+
+User.virtual('deal',{
+    ref : 'Deal',
+    localField: '_id',
+    foreignField: 'seller'
 })
 
 // Set Object and Json property to true. Default is set to false

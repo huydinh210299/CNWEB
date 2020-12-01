@@ -3,11 +3,11 @@ const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const fileUpload = require('express-fileupload');
-const jsdom = require('jsdom')
 const app = express();
 const port = 3000;
 const route = require('./routes');
 const db = require('./config/db');
+const helpers = require('./util/handlebarHelpers');
 
 //connect DB
 db.connect();
@@ -26,32 +26,10 @@ app.use(fileUpload());
 //biến local kiểm tra trạng thái đăng nhập
 app.locals.login = false;
 
-// app.use(function (req, res, next) {
-//   res.locals.user = req.user
-//   res.locals.authenticated = !req.user.anonymous
-//   next()
-// })
-
 //template engine
 app.engine('hbs',handlebars({
     extname : '.hbs',
-    helpers : {
-      //Hàm thực hiện so sánh giá trị
-      equal : function(a,b,options) {
-        if (a === b) { return options.fn(this); }
-        return options.inverse(this);
-      },
-      notequal : function(a,b,options) {
-        if (a !== b) { return options.fn(this); }
-        return options.inverse(this);
-      },
-      isSelected: function (a, b) {
-        return a === b ? 'selected' : ''; 
-      },
-      isActive: function (a){
-        return a === 0 ? 'active' : '';
-      }
-    }
+    helpers : helpers
 }))
 app.set('view engine', 'hbs');
 //config views

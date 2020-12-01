@@ -13,8 +13,8 @@
                     <h1 class="fullname" style="font-family: cursive">{{user.fullname}}</h1>
                 </div>
                 <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image"
-                            class="img-circle img-responsive"
-                            src="/upload/avatar/{{user.avata}}" style="height: 100px;"></a></div>
+                            class="img-circle img-responsive" src="/upload/avatar/{{user.avata}}"
+                            style="height: 100px;"></a></div>
             </div>
             <div class="row row bg-light p-3 mt-3">
                 <div class="col-sm-4">
@@ -28,7 +28,7 @@
                     </hr><br>
 
                     <ul class="list-group">
-                        <li class="list-group-item text-muted">Thống kê hoạt động <i class="fa fa-dashboard fa-1x"></i>
+                        <li class="list-group-item text-muted"><i class="fa fa-dashboard fa-1x mr-2"></i>Thống kê hoạt động
                         </li>
                         <li class="list-group-item d-flex justify-content-between"><span class="pull-left"><strong>SP đã
                                     bán </strong></span>
@@ -48,25 +48,27 @@
                 </div>
                 <!--/col-3-->
                 <div class="col-sm-8">
+                    <h4 class="success text-success mb-3" style="display: none;">Cập nhật thành công</h4>
+                    <h4 class="error text-danger mb-3" style="display: none;">Cập nhật thất bại</h4>
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item"><a data-toggle="tab" class="nav-link active" role="tab"
                                 href="#profile">Home</a></li>
                         <li class="nav-item"><a data-toggle="tab" class="nav-link" role="tab"
-                                href="#password">Password</a></li>
+                                href="#passwordtab">Password</a></li>
                         <li class="nav-item"><a data-toggle="tab" class="nav-link" role="tab"
                                 href="#description">Description</a></li>
                     </ul>
 
                     <div class="tab-content mt-3">
                         <div class="tab-pane fade active show" role="tabpanel" id="profile">
-                            <form class="form" action="##" method="post" id="form-info">
+                            <form class="form" id="form-info">
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <label for="full_name">
-                                            <h4>Tên: </h4>
+                                            <h5>Tên: </h5>
                                         </label>
                                         <input type="text" value="{{user.fullname}}" class="form-control"
-                                            name="full_name" id="full_name" placeholder="Nhập vào tên của bạn."
+                                            name="fullname" id="fullname" placeholder="Nhập vào tên của bạn."
                                             title="Nhập vào tên của bạn.">
                                     </div>
                                 </div>
@@ -74,9 +76,9 @@
 
                                     <div class="col-xs-6">
                                         <label for="gender">
-                                            <h4>Giới tính:</h4>
+                                            <h5>Giới tính:</h5>
                                         </label>
-                                        <select class="form-control" name="gender">
+                                        <select class="form-control" name="gender" id="gender">
                                             {{#equal user.gender "male"}}
                                             <option value="male" selected>Nam</option>
                                             <option value="female">Nữ</option>
@@ -92,11 +94,12 @@
 
                                     <div class="col-xs-6">
                                         <label for="gender">
-                                            <h4>Khu vực:</h4>
+                                            <h5>Khu vực:</h5>
                                         </label>
-                                        <select class="form-control" name="area">
+                                        <select class="form-control" name="area" id="area">
                                             {{#each area}}
-                                                <option value="{{this}}" {{{isSelected this ../user.area}}}>{{this}}</option>
+                                            <option value="{{this}}" {{{isSelected this ../user.area}}}>{{this}}
+                                            </option>
                                             {{/each}}
                                         </select>
                                     </div>
@@ -104,7 +107,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <label for="phone">
-                                            <h4>Số điện thoại:</h4>
+                                            <h5>Số điện thoại:</h5>
                                         </label>
                                         <input type="text" class="form-control" name="phone" id="phone"
                                             placeholder="Nhập vào số điện thoại của bạn."
@@ -115,19 +118,21 @@
 
                                     <div class="col-xs-12">
                                         <label for="email">
-                                            <h4>Email:</h4>
+                                            <h5>Email:</h5>
                                         </label>
-                                        <input type="email" class="form-control" name="email" id="email" value="{{user.email}}"
-                                            placeholder="Nhập vào email của bạn." title="Nhập vào email của bạn.">
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            value="{{user.email}}" placeholder="Nhập vào email của bạn."
+                                            title="Nhập vào email của bạn.">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <label for="address">
-                                            <h4>Địa chỉ:</h4>
+                                            <h5>Địa chỉ:</h5>
                                         </label>
-                                        <input type="text" class="form-control" name="address" id="address" value="{{user.address}}"
-                                            placeholder="Nhập vào địa chỉ của bạn" title="Nhập vào địa chỉ của bạn">
+                                        <input type="text" class="form-control" name="address" id="address"
+                                            value="{{user.address}}" placeholder="Nhập vào địa chỉ của bạn"
+                                            title="Nhập vào địa chỉ của bạn">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -143,13 +148,13 @@
 
                         </div>
                         <!--/tab-pane-->
-                        <div class="tab-pane fade" role="tabpanel" id="password">
-                            <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="tab-pane fade" role="tabpanel" id="passwordtab">
+                            <form class="form" id="form-password">
                                 <div class="form-group">
 
                                     <div class="col-xs-12">
                                         <label for="password">
-                                            <h4>Mật khẩu mới</h4>
+                                            <h5>Mật khẩu mới</h5>
                                         </label>
                                         <input type="password" class="form-control" name="password" id="password"
                                             placeholder="Nhập vào mật khẩu mới." title="Nhập vào mật khẩu mới.">
@@ -159,7 +164,7 @@
 
                                     <div class="col-xs-12">
                                         <label for="password2">
-                                            <h4>Xác nhận lại mật khẩu</h4>
+                                            <h5>Xác nhận lại mật khẩu</h5>
                                         </label>
                                         <input type="password" class="form-control" name="password2" id="password2"
                                             placeholder="Nhập lại mật khẩu mới." title="Nhập lại mật khẩu mới.">
@@ -176,13 +181,14 @@
                         </div>
                         <!--/tab-pane-->
                         <div class="tab-pane fade" role="tabpanel" id="description">
-                            <form class="form" action="##" method="post" id="description form">
+                            <form class="form" id="form-description">
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <label for="description">
-                                            <h4>Mô tả ngắn:</h4>
+                                            <h5>Mô tả ngắn:</h5>
                                         </label>
-                                        <textarea class="form-control" rows="10" id="comment">{{user.description}}</textarea>
+                                        <textarea class="form-control description" rows="10"
+                                            name="description">{{user.description}}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -204,22 +210,4 @@
         <!--/row-->
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        var readURL = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('.avatar').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $(".file-upload").on('change', function () {
-            readURL(this);
-        });
-    });
-</script>
+<script src="/js/user-profile.js"></script>

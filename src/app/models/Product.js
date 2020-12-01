@@ -68,5 +68,15 @@ const Product = new Schema({
 }, {timestamps : true});
 //time stamp: lưu thông tin createAt và modifyAt
 
+//Quan hệ với bảng deal
+Product.virtual('deal',{
+    ref : 'Deal',
+    localField: '_id',
+    foreignField: 'product'
+})
+
+// Set Object and Json property to true. Default is set to false
+Product.set('toObject', { virtuals: true });
+Product.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('Product', Product ,'product');

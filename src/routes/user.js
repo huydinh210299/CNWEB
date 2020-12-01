@@ -18,12 +18,11 @@ router.get('/logout',requireAuth, userController.logout);
 router.get('/getone',requireAuth, userController.getone);
 // profile
 router.get('/profile',requireAuth, userController.profile);
+router.post('/profile/updateinfo',requireAuth,UserController.updateInfo);
+router.post('/profile/updatedes',requireAuth, UserController.updateDes);
+router.post('/profile/updatepass',requireAuth, UserController.updatePass);
+
 // dashboard
 router.get('/dashboard',requireAuth, userController.dashboard);
-// list product
-router.get('/onsale',requireAuth, userController.onsale);
-router.get('/sold',requireAuth, userController.sold);
-router.get('/buyed',requireAuth, userController.buyed);
-router.get('/bid',requireAuth, userController.bid);
 
 module.exports = router;

@@ -1,0 +1,41 @@
+<div class="my-container-fuild py-5">
+
+  <div class="row">
+    <div class="col-lg-10 mx-auto">
+
+      <!-- List group-->
+      <ul class="list-group shadow">
+
+        {{!-- product-item --}}
+        {{#if product}}
+        {{#each product}}
+          <li class="list-group-item">
+            <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+              <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">{{this.name}}</h5>
+                <p class="font-italic text-muted mb-0 small">{{this.title}}</p>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                  <h6 class="font-weight-bold my-2">{{this.price}}</h6>
+                  <div class="amount h6">Số lượng : {{this.quantity}}</div>
+                </div>
+              </div><img src="/upload/product/{{this.image.[0]}}"
+                alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+            </div>
+          </li>
+        {{/each}}
+        {{else}}
+        <h1 class="text-center text-danger">Bạn chưa bán sản phẩm nào</h1>
+        {{/if}}
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ul class="pagination justify-content-center mt-5">
+  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+  <li class="page-item"><a class="page-link" href="#">1</a></li>
+  <li class="page-item"><a class="page-link" href="#">2</a></li>
+  <li class="page-item"><a class="page-link" href="#">3</a></li>
+  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>

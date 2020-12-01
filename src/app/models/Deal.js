@@ -3,17 +3,25 @@ const Schema = mongoose.Schema;
 
 const Deal = new Schema({
     //id sản phẩm
-    id_product: {
+    product: {
         type: Schema.Types.ObjectId,
+        ref: 'Product',
         required: true
     },
     //id người mua hoặc đấu giá
-    id_buyer: {
+    buyer: {
         type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    //id người bán
+    seller: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     //trả giá: trường hợp đấu giá
-    aution_price: {
+    auction_price: {
         type: Number,
         required: false
     },
@@ -22,7 +30,6 @@ const Deal = new Schema({
         default: "pending",
         required: true
     },
-    //trạng thái đơn hàng: thành công, thất bại
     isdelete: {
         type: Boolean,
         default: false,
