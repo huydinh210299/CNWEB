@@ -5,7 +5,7 @@
             <div class="list-group" style="height: 100%; background-color: #fff;">
                 <a href="/user/profile" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
                 <a href="/user/dashboard" class="list-group-item list-group-item-action active">Thống kê hoạt động</a>
-                <button class="list-group-item list-group-item-action">Các sản phẩm đã mua</button>
+                <button class="list-group-item list-group-item-action btn-ur-deal" data="false" data-url="/product/buyed">Các sản phẩm đã mua</button>
             </div>
         </div>
         <div class="col-md-9">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-4 emphasis">
                         <h2><strong>43</strong></h2>
-                        <button class="btn btn-primary btn-block" ><span class="fa fa-gear"></span>Sản phẩm đã đấu giá
+                        <button class="btn btn-primary btn-block btn-ur-deal" data="true" data-url="/product/bid"><span class="fa fa-gear"></span>Sản phẩm đã đấu giá
                         </button>
                     </div>
                     </div>
@@ -57,13 +57,15 @@
 </div>
 </div>
 
-<form id="formUrpProduct" action="" method="POST" hidden>
+<form id="formUrProduct" action="" method="POST" hidden>
     <input name="page" class="page" value="1"/>
     <input name="completed" class="completed"/>
     <input name="data-url" class="data-url"/>
 </form>
-<form id="formUrDeal">
-
+<form id="formUrDeal" action="" method="POST" hidden>
+    <input name="page" class="page" value="1"/>
+    <input name="type" class="type"/>
+    <input name="data-url" class="data-url"/>
 </form>
 
 <script>
@@ -73,7 +75,17 @@
         let data_url = $(el).attr('data-url');
         $('.completed').val(data);
         $('.data-url').val(data_url);
-        $('#formUrpProduct').attr('action',data_url);
-        $('#formUrpProduct')[0].submit();
-    })
+        $('#formUrProduct').attr('action',data_url);
+        $('#formUrProduct')[0].submit();
+    });
+
+    $(document).on('click','.btn-ur-deal', (e) => {
+        let el = e.target;
+        let data = $(el).attr('data');
+        let data_url = $(el).attr('data-url');
+        $('.type').val(data);
+        $('.data-url').val(data_url);
+        $('#formUrDeal').attr('action',data_url);
+        $('#formUrDeal')[0].submit();
+    });
 </script>

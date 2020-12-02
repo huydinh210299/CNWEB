@@ -4,7 +4,8 @@
             <div class="list-group" style="height: 100%; background-color: #fff;">
                 <a href="/user/profile" class="list-group-item list-group-item-action active">Thông tin cá nhân</a>
                 <a href="/user/dashboard" class="list-group-item list-group-item-action">Thống kê hoạt động</a>
-                <a href="/user/buyed" class="list-group-item list-group-item-action">Các sản phẩm đã mua</a>
+                <button class="list-group-item list-group-item-action btn-ur-deal" data="false"
+                    data-url="/product/buyed">Các sản phẩm đã mua</button>
             </div>
         </div>
         <div class="col-md-9">
@@ -28,7 +29,8 @@
                     </hr><br>
 
                     <ul class="list-group">
-                        <li class="list-group-item text-muted"><i class="fa fa-dashboard fa-1x mr-2"></i>Thống kê hoạt động
+                        <li class="list-group-item text-muted"><i class="fa fa-dashboard fa-1x mr-2"></i>Thống kê hoạt
+                            động
                         </li>
                         <li class="list-group-item d-flex justify-content-between"><span class="pull-left"><strong>SP đã
                                     bán </strong></span>
@@ -210,4 +212,37 @@
         <!--/row-->
     </div>
 </div>
+
+<form id="formUrProduct" action="" method="POST" hidden>
+    <input name="page" class="page" value="1"/>
+    <input name="completed" class="completed"/>
+    <input name="data-url" class="data-url"/>
+</form>
+<form id="formUrDeal" action="" method="POST" hidden>
+    <input name="page" class="page" value="1"/>
+    <input name="type" class="type"/>
+    <input name="data-url" class="data-url"/>
+</form>
+
+<script>
+    $(document).on('click', '.btn-ur-product', (e) => {
+        let el = e.target;
+        let data = $(el).attr('data');
+        let data_url = $(el).attr('data-url');
+        $('.completed').val(data);
+        $('.data-url').val(data_url);
+        $('#formUrProduct').attr('action', data_url);
+        $('#formUrProduct')[0].submit();
+    });
+
+    $(document).on('click', '.btn-ur-deal', (e) => {
+        let el = e.target;
+        let data = $(el).attr('data');
+        let data_url = $(el).attr('data-url');
+        $('.type').val(data);
+        $('.data-url').val(data_url);
+        $('#formUrDeal').attr('action', data_url);
+        $('#formUrDeal')[0].submit();
+    });
+</script>
 <script src="/js/user-profile.js"></script>

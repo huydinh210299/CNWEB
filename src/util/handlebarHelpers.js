@@ -22,6 +22,30 @@ const helpers = {
       if (a !== null && a !== "") { options.fn(this); }
       return  options.inverse(this);
     },
+    dealStatus: function(a,options){
+      if (a === "pending") return "Đang xử lý";
+      if (a === "done") return "Thành công";
+      return "Thất bại";
+    },
+    checkDealStatus: function(a,options){
+      return a === "pending" ? "" : "disabled";
+    },
+    checkNext: function(a,options){
+      //trang hiện tại không có data
+      return a == "0" ? "disabled" : "";
+    },
+    checkPrev: function(a,options){
+      //Nếu trang hiện tại đang là 1;
+      return a == "1" ? "disabled" : "";
+    },
+    highestDeal: function(array,options){
+      if(array.length == 0) return "Chưa có"
+      else{
+        const maxValueOfY = Math.max(...array.map(o => o.auction_price), 0);
+        if(maxValueOfY) return maxValueOfY + "Đ";
+        return "Chưa có";
+      }
+    }
   }
 
   module.exports = helpers;

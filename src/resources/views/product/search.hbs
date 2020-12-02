@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="/css/product-item.css" />
+<div class="my-container-fuild mt-5 mb-1">
+
+    <form class="form-search" id="form-search" action="/product/search" method="POST" hidden>
+        <input class="category" name="category" value="{{category}}" />
+        <input class="title" name="title" value="{{title}}" />
+        <input class="area" name="area" value="{{area}}" />
+        <input class="page" name="page" value="{{page}}" />
+    </form>
+    <div class="quick-sort">
+        <div class="btn-group dropright">
+            <button type="button" class="btn dropdown-toggle btn-category" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Danh mục sản phẩm
+            </button>
+            <div class="dropdown-menu">
+                <button class="dropdown-item category-item" data="all">Tất cả</button>
+                {{#each categories}}
+                <button class="dropdown-item category-item" data="{{this.name}}">{{this.name}}</button>
+                {{/each}}
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-area" data-toggle="modal" data-target="#areaModal">
+            <span><i class="fas fa-map-marker-alt mr-2"></i>Khu vực</span>
+        </button>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item bread-category" aria-current="page" data="{{category}}">{{category}}</li>
+        </ol>
+    </nav>
+</div>
+
+
+{{#if product}}
+<div class="my-container-fuild list-product">
+    {{#each product}}
+    <div class="card product-item">
+        <div class="card-img" style="background-image:url(/upload/product/{{this.image.[0]}});">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <a href="/product/info/{{this.slug}}">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-content">
+            <a href="#">
+                <div class="product-title">{{this.title}}</div>
+                <div class="product-price">{{this.price}}đ</div>
+            </a>
+            <div class="location-wrapper">
+                <i class="fas fa-map-marker-alt"></i><span class="location">{{this.seller.[0].area}}</span>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+
+<ul class="pagination justify-content-center mt-5">
+    <li class="page-item"><button class="page-link" {{{checkPrev page}}} action-type="sub">Previous</button></li>
+    <li class="page-item"><button class="page-link" {{{checkNext product.length}}} action-type="add">Next</button>
+    </li>
+</ul>
+{{else}}
+<h1 class="text-center text-success">Không tìm thấy sản phẩm phù hợp</h1>
+{{/if}}
+
+
+<!-- Modal -->
+<div class="modal fade" id="areaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chọn khu vực</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ol class="list-area">
+
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-cancel-area">Bỏ chọn</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Script giữ nguyên title search
+    $(document).ready(function () {
+        $('.searchbar').val($('.title').val());
+    })
+</script>
+<script src="/js/renderArea.js"></script>

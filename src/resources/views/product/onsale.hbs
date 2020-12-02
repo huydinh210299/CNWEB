@@ -22,13 +22,13 @@
                 alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                 <div class="contact ml-lg-5 order-1 order-lg-2">
                   <p>Lượt tương tác: {{this.deal.length}}</p>
-                  <a href="#" class="btn btn-success">Xem ngay</a>
+                  <a href="/deal/manager" class="btn btn-success">Xem ngay</a>
                 </div>
             </div>
           </li>
         {{/each}}
         {{else}}
-        <h1 class="text-center text-danger">Bạn chưa đăng bán sản phẩm nào</h1>
+        <h1 class="text-center text-danger">Không có sản phẩm nào</h1>
         {{/if}}
 
       </ul>
@@ -36,7 +36,31 @@
   </div>
 </div>
 
+{{!-- form thực hiển chuyển trang --}}
+<form id="formUrProduct" action="/product/onsale" method="POST" hidden>
+    <input name="page" class="page" value="{{page}}"/>
+    <input name="completed" class="completed" value="{{completed}}"/>
+</form>
+
 <ul class="pagination justify-content-center mt-5">
-  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  <li class="page-item"><button class="page-link" {{{checkPrev page}}} action-type="sub">Previous</button></li>
+  <li class="page-item"><button class="page-link" {{{checkNext product.length}}} action-type="add">Next</button></li>
 </ul>
+
+<script>
+
+  $(document).on('click','.page-link', (e) => {
+    let el = e.target;
+    let action = $(el).attr('action-type');
+    let page = $('.page').val();
+    page = parseInt(page);
+    if(action == "sub"){
+      $('.page').val(--page);
+    }
+    if(action == "add"){
+      $('.page').val(++page);
+    }
+
+    $('#formUrProduct')[0].submit();
+  })
+</script>

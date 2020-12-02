@@ -2,11 +2,18 @@
 <div class="container mt-3">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
-      <li class="breadcrumb-item"><a href="#">Điện thoại</a></li>
-      <li class="breadcrumb-item active" aria-current="page">iPhone 12</li>
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item bread-category" aria-current="page" data="{{product.category.name}}">{{product.category.name}}</li>
     </ol>
   </nav>
+</div>
+<div class="container mt-3">
+  <form class="form-search" id="form-search" action="/product/search" method="POST" hidden>
+    <input class="category" name="category" value="{{product.category.name}}" />
+    <input class="title" name="title" />
+    <input class="area" name="area" />
+    <input class="page" name="page" value="1"/>
+  </form>
   <h1 class="text text-center">Thông tin sản phẩm</h1>
   <div class="card bg-light">
     <div class="container-fliud">
@@ -31,6 +38,7 @@
           <div class="conten-wrapper">
             <h3 class="product-title">{{product.title}}</h3>
             <h4 class="price">Giá bán: <span>{{product.price}}đ</span></h4>
+            <h5 class="text-danger">Trả giá cao nhất: {{highestDeal product.deal}}</h5>
             <p class="product-description">{{product.description}}</p>
             <p class="area">Khu vực: {{product.user.area}}</p>
             <p class="address">Địa chỉ bán: {{product.user.address}}</p>

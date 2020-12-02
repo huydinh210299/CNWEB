@@ -24,7 +24,7 @@
           </li>
         {{/each}}
         {{else}}
-        <h1 class="text-center text-danger">Bạn chưa bán sản phẩm nào</h1>
+        <h1 class="text-center text-danger">Không có sản phẩm nào</h1>
         {{/if}}
 
       </ul>
@@ -32,10 +32,31 @@
   </div>
 </div>
 
+{{!-- form thực hiển chuyển trang --}}
+<form id="formUrProduct" action="/product/sold" method="POST" hidden>
+    <input name="page" class="page" value="{{page}}"/>
+    <input name="completed" class="completed" value="{{completed}}"/>
+</form>
+
 <ul class="pagination justify-content-center mt-5">
-  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">2</a></li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  <li class="page-item"><button class="page-link" {{{checkPrev page}}} action-type="sub">Previous</button></li>
+  <li class="page-item"><button class="page-link" {{{checkNext product.length}}} action-type="add">Next</button></li>
 </ul>
+
+{{!-- script chuyển trang --}}
+<script>
+  $(document).on('click','.page-link', (e) => {
+    let el = e.target;
+    let action = $(el).attr('action-type');
+    let page = $('.page').val();
+    page = parseInt(page);
+    if(action == "sub"){
+      $('.page').val(--page);
+    }
+    if(action == "add"){
+      $('.page').val(++page);
+    }
+
+    $('#formUrProduct')[0].submit();
+  })
+</script>

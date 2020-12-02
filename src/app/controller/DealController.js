@@ -37,6 +37,12 @@ class DealController {
             res.status(400).json({error : "Tạo yêu cầu đấu giá thất bại"});
         }
     }
+
+
+    //GET /deal/manager
+    manager(req,res){
+        res.render('user/dealmanager');
+    }
 }
 
 module.exports = new DealController;

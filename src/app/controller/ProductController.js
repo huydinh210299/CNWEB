@@ -1,11 +1,10 @@
 const Product = require('../models/Product');
 const path = require('path');
 const Category = require('../models/Category');
-const { toArrObject } = require('../../util/mongooes');
-const { toObject } = require('../../util/mongooes');
+const { toArrObject, toObject } = require('../../util/mongooes');
 const userinfo = require('../../util/userinfo');
 const dirupload = path.join(__dirname, '..', '..', 'public', 'upload', 'product');
-const {getUrProduct, getUrDeal} = require('../../util/commonFunc');
+const { getUrProduct, getUrDeal ,searchProduct, getCategory} = require('../../util/commonFunc');
 
 class ProductController {
     //GET /product/auction
@@ -21,7 +20,10 @@ class ProductController {
 
     //GET /product/info
     productInfo(req, res) {
-        Product.findOne({ slug: req.params.slug }).populate('user')
+        Product.findOne({ slug: req.params.slug })
+        .populate('user')
+        .populate('category')
+        .populate('deal')
             .then(product => {
                 res.render('product/productinfo', {
                     product: toObject(product)
@@ -77,35 +79,83 @@ class ProductController {
             .catch(err => console.log(err))
     }
 
-    //GET /product/sold
+    //POST /product/sold
     async sold(req, res) {
-        let rs = await getUrProduct(req);
-        if(rs){
-            res.render('product/sold',{
-                product : toArrObject(rs)
-            });
-        }else{
-            res.status(500).json({error : "Lỗi kết nối cơ sở dữ liệu"})
+        try {
+            let rs = await getUrProduct(req);
+            if (rs) {
+                res.render('product/sold', {
+                    product: toArrObject(rs),
+                    page: req.body.page,
+                    completed: req.body.completed
+                });
+            } else {
+                res.status(500).json({ error: "Lỗi kết nối cơ sở dữ liệu" })
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
-    //GET /product/onsale
+    //POST /product/onsale
     async onsale(req, res) {
         let rs = await getUrProduct(req);
-        if(rs){
-            res.render('product/onsale',{
-                product : toArrObject(rs)
+        if (rs) {
+            res.render('product/onsale', {
+                product: toArrObject(rs),
+                page: req.body.page,
+                completed: req.body.completed
             });
-        }else{
-            res.status(500).json({error : "Lỗi kết nối cơ sở dữ liệu"})
+        } else {
+            res.status(500).json({ error: "Lỗi kết nối cơ sở dữ liệu" })
         }
     }
-    //GET /product/buyed
-    buyed(req, res) {
-        res.render('product/buyed');
+    //POST /product/buyed
+    async buyed(req, res) {
+        let rs = await getUrDeal(req);
+        if (rs) {
+            res.render('product/buyed', {
+                product: toArrObject(rs),
+                page: req.body.page,
+                type: req.body.type
+            });
+        }
+        else {
+            res.status(500).json({ error: "Lỗi kết nối cơ sở dữ liệu" })
+        }
     }
-    //GET /product/bid
-    bid(req, res) {
-        res.render('product/bid');
+    //POST /product/bid
+    async bid(req, res) {
+        let rs = await getUrDeal(req);
+        if (rs) {
+            res.render('product/bid', {
+                product: toArrObject(rs),
+                page: req.body.page,
+                type: req.body.type
+            });
+        }
+        else {
+            res.status(500).json({ error: "Lỗi kết nối cơ sở dữ liệu" })
+        }
+    }
+
+    //POST /product/search
+    async search(req,res){
+        try {
+            const categories = await getCategory(req);
+            let rs = await searchProduct(req);
+            if(rs){
+                res.render('product/search',{
+                    product : rs,
+                    page : req.body.page,
+                    title : req.body.title,
+                    area : req.body.area,
+                    category : req.body.category,
+                    categories : toArrObject(categories)
+                })
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 }

@@ -15,7 +15,10 @@ router.post('/create',productController.post_creat);
 // list product
 router.post('/onsale',requireAuth, productController.onsale);
 router.post('/sold',requireAuth, productController.sold);
-router.get('/buyed',requireAuth, productController.buyed);
-router.get('/bid',requireAuth, productController.bid);
+router.post('/buyed',requireAuth, productController.buyed);
+router.post('/bid',requireAuth, productController.bid);
+
+// search
+router.post('/search',requireAuth, productController.search);
 
 module.exports = router;

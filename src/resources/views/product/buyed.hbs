@@ -1,115 +1,3 @@
-{{!-- <h1 class="mt-5 text-center">Danh sách sản phẩm đang bán</h1>
-<div class="my-container-fuild list-product">
-    <div class="card product-item">
-        <div class="card-img"
-            style="background-image:url(https://images.unsplash.com/photo-1519176336903-04be58a477d2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eda05ddcb3154f39fd8ce88fdd44f531&auto=format&fit=crop&w=500&q=60);">
-            <div class="overlay">
-                <div class="overlay-content">
-                    <a href="#!">View Details</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-content">
-            <a href="#">
-                <div class="product-title">Dell gaming 7559</div>
-                <div class="product-price">5.900.000đ</div>
-            </a>
-            <div class="location-wrapper">
-                <i class="fas fa-map-marker-alt"></i><span class="location">Hà Nội</span>
-            </div>
-        </div>
-    </div>
-    <div class="card product-item">
-        <div class="card-img"
-            style="background-image:url(https://images.unsplash.com/photo-1519176336903-04be58a477d2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eda05ddcb3154f39fd8ce88fdd44f531&auto=format&fit=crop&w=500&q=60);">
-            <div class="overlay">
-                <div class="overlay-content">
-                    <a href="#!">View Details</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-content">
-            <a href="#">
-                <div class="product-title">Dell gaming 7559</div>
-                <div class="product-price">5.900.000đ</div>
-            </a>
-            <div class="location-wrapper">
-                <i class="fas fa-map-marker-alt"></i><span class="location">Hà Nội</span>
-            </div>
-        </div>
-    </div>
-    <div class="card product-item">
-        <div class="card-img"
-            style="background-image:url(https://images.unsplash.com/photo-1519176336903-04be58a477d2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eda05ddcb3154f39fd8ce88fdd44f531&auto=format&fit=crop&w=500&q=60);">
-            <div class="overlay">
-                <div class="overlay-content">
-                    <a href="#!">View Details</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-content">
-            <a href="#">
-                <div class="product-title">Dell gaming 7559</div>
-                <div class="product-price">5.900.000đ</div>
-            </a>
-            <div class="location-wrapper">
-                <i class="fas fa-map-marker-alt"></i><span class="location">Hà Nội</span>
-            </div>
-        </div>
-    </div>
-    <div class="card product-item">
-        <div class="card-img"
-            style="background-image:url(https://images.unsplash.com/photo-1519176336903-04be58a477d2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eda05ddcb3154f39fd8ce88fdd44f531&auto=format&fit=crop&w=500&q=60);">
-            <div class="overlay">
-                <div class="overlay-content">
-                    <a href="#!">View Details</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-content">
-            <a href="#">
-                <div class="product-title">Dell gaming 7559</div>
-                <div class="product-price">5.900.000đ</div>
-            </a>
-            <div class="location-wrapper">
-                <i class="fas fa-map-marker-alt"></i><span class="location">Hà Nội</span>
-            </div>
-        </div>
-    </div>
-    <div class="card product-item">
-        <div class="card-img"
-            style="background-image:url(https://images.unsplash.com/photo-1519176336903-04be58a477d2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eda05ddcb3154f39fd8ce88fdd44f531&auto=format&fit=crop&w=500&q=60);">
-            <div class="overlay">
-                <div class="overlay-content">
-                    <a href="#!">View Details</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-content">
-            <a href="#">
-                <div class="product-title">Dell gaming 7559</div>
-                <div class="product-price">5.900.000đ</div>
-            </a>
-            <div class="location-wrapper">
-                <i class="fas fa-map-marker-alt"></i><span class="location">Hà Nội</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<ul class="pagination justify-content-center mt-5">
-  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">2</a></li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul> --}}
-
 <div class="my-container-fuild py-5">
 
   <div class="row">
@@ -118,84 +6,64 @@
       <!-- List group-->
       <ul class="list-group shadow">
 
-        <!-- list group item-->
+        {{!-- product-item --}}
+        {{#if product}}
+        {{#each product}}
         <li class="list-group-item">
-          <!-- Custom content-->
           <div class="media align-items-lg-center flex-column flex-lg-row p-3">
             <div class="media-body order-2 order-lg-1">
-              <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-              <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
+              <h5 class="mt-0 font-weight-bold mb-2">{{this.product.name}}</h5>
+              <p class="font-italic text-muted mb-0 small">{{this.product.title}}</p>
               <div class="d-flex align-items-center justify-content-between mt-1">
-                <h6 class="font-weight-bold my-2">$120.00</h6>
-                <div class="amount h6">Số lượng : 1</div>
+                <h6 class="font-weight-bold my-2">{{this.product.price}}</h6>
+                <div class="amount h6">Số lượng : {{this.product.quantity}}</div>
               </div>
-            </div><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+            </div>
+            <div class="status order-1 order-lg-2 d-flex flex-column ml-lg-5 justify-content-around text-center"
+              style="height: 80px;">
+              <div>Trạng thái</div>
+              <div>{{{dealStatus this.result}}}</div>
+            </div>
+            <img src="/upload/product/{{this.product.image.[0]}}" alt="Generic placeholder image" width="200"
+              class="ml-lg-5 order-1 order-lg-2">
+            <div class="status order-1 order-lg-2 ml-lg-5">
+              <button class="btn-delete btn btn-danger" {{{checkDealStatus this.result}}}>Hủy đơn</button>
+            </div>
           </div>
-          <!-- End -->
         </li>
-        <!-- End -->
-
-        <!-- list group item-->
-        <li class="list-group-item">
-          <!-- Custom content-->
-          <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-            <div class="media-body order-2 order-lg-1">
-              <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-              <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-              <div class="d-flex align-items-center justify-content-between mt-1">
-                <h6 class="font-weight-bold my-2">$99.00</h6>
-                <div class="amount h6">Số lượng : 1</div>
-              </div>
-            </div><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485077/shoes-3_rk25rt.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-          </div>
-          <!-- End -->
-        </li>
-        <!-- End -->
-
-        <!-- list group item -->
-        <li class="list-group-item">
-          <!-- Custom content-->
-          <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-            <div class="media-body order-2 order-lg-1">
-              <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-              <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-              <div class="d-flex align-items-center justify-content-between mt-1">
-                <h6 class="font-weight-bold my-2">$140.00</h6>
-               <div class="amount h6">Số lượng : 1</div>
-              </div>
-            </div><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485078/shoes-2_g4qame.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-          </div>
-          <!-- End -->
-        </li>
-        <!-- End -->
-
-        <!-- list group item -->
-        <li class="list-group-item">
-          <!-- Custom content-->
-          <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-            <div class="media-body order-2 order-lg-1">
-              <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-              <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-              <div class="d-flex align-items-center justify-content-between mt-1">
-                <h6 class="font-weight-bold my-2">$220.00</h6>
-                <div class="amount h6">Số lượng : 1</div>
-              </div>
-            </div><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485078/shoes-4_vgfjy9.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-          </div>
-          <!-- End -->
-        </li>
-        <!-- End -->
+        {{/each}}
+        {{else}}
+        <h1 class="text-center text-danger">Không có sản phẩm nào</h1>
+        {{/if}}
 
       </ul>
-      <!-- End -->
     </div>
   </div>
 </div>
 
+<form id="formUrDeal" action="/product/buyed" method="POST" hidden>
+    <input name="page" class="page" value="{{page}}"/>
+    <input name="type" class="type" value="{{type}}"/>
+</form>
+
 <ul class="pagination justify-content-center mt-5">
-  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">2</a></li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  <li class="page-item"><button class="page-link" {{{checkPrev page}}} action-type="sub">Previous</button></li>
+  <li class="page-item"><button class="page-link" {{{checkNext product.length}}} action-type="add">Next</button></li>
 </ul>
+
+<script>
+  $(document).on('click','.page-link', (e) => {
+    let el = e.target;
+    let action = $(el).attr('action-type');
+    let page = $('.page').val();
+    page = parseInt(page);
+    if(action == "sub"){
+      $('.page').val(--page);
+    }
+    if(action == "add"){
+      $('.page').val(++page);
+    }
+
+    $('#formUrDeal')[0].submit();
+  })
+</script>

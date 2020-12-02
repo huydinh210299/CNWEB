@@ -40,7 +40,45 @@
     background-color: aliceblue;
 }
 
+.modal-body .list-area .area-item button:focus{
+    outline: none;
+}
+
 .modal-body .list-area{
     list-style-type: none;
     padding-left: 0px;
+}
+
+body {
+    font: 13px arial, helvetica, clean, sans-serif;
+    background-color: #ececec;
+}
+
+a:link {
+    text-decoration: none !important;
+}
+input:focus{
+    outline: none !important;
+}
+
+.container{
+    width: 80% !important;
+}
+
+button:disabled{
+    cursor: not-allowed;
+}
+
+.my-container-fuild .breadcrumb{
+    margin: 8px 2% !important;
+}
+
+.breadcrumb{
+    background-color: #e3e3e3 !important;
+    border-radius: unset !important;
+}
+
+.breadcrumb .breadcrumb-item{
+    margin: 0 2px !important;
+    cursor: pointer;
 }

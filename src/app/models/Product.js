@@ -48,7 +48,7 @@ const Product = new Schema({
         required: true
     },
     //thể loại
-    category:{
+    category: {
         type : Schema.Types.ObjectId,
         ref: 'Category',
         required: true

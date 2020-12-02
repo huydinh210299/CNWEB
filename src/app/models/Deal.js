@@ -23,7 +23,8 @@ const Deal = new Schema({
     //trả giá: trường hợp đấu giá
     auction_price: {
         type: Number,
-        required: false
+        default : 0,
+        required: true
     },
     result: {
         type: String,//pending, done, fail
