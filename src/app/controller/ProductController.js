@@ -9,7 +9,10 @@ const { getUrProduct, getUrDeal ,searchProduct, getCategory} = require('../../ut
 class ProductController {
     //GET /product/auction
     auction(req, res) {
-        Product.findOne({ slug: req.params.slug }).populate('user')
+        Product.findOne({ slug: req.params.slug })
+        .populate('user')
+        .populate('category')
+        .populate('deal')
             .then(product => {
                 res.render('product/auction', {
                     product: toObject(product)
