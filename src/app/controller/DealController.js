@@ -2,6 +2,8 @@ const Deal = require('../models/Deal');
 const { toArrObject } = require('../../util/mongooes');
 const { toObject } = require('../../util/mongooes');
 const userinfo = require('../../util/userinfo');
+const Product = require('../models/Product');
+const mongoose =  require('mongoose');
 
 class DealController {
     
@@ -39,9 +41,48 @@ class DealController {
     }
 
 
-    //GET /deal/manager
+    //GET /deal/manager/:id
     manager(req,res){
-        res.render('user/dealmanager');
+        Deal.find({ product: req.params.id })
+        .populate('buyer')
+        .then(deal => res.render('user/dealmanager',{
+            deal : toArrObject(deal),
+            productid : req.params.id
+        }))
+        .catch(err => console.log(err));
+    }
+
+    //POST /deal/nmanager
+    async post_manager(req,res){
+        let product = req.body.product;
+        let deal = req.body.deal;
+        let rs = await Product.updateOne({ _id: product }, {
+            $set: {
+                completed: true,
+            }
+        });
+        await Deal.updateMany({_id : { $ne : deal },product : product},{
+            result : "fail"
+        })
+        await Deal.updateOne({_id : deal},{
+            result : "done"
+        })
+        if(rs){
+            res.status(200).json({success : "done"})
+        }
+        else return res.status(200).json({error : "fail"})
+    }
+
+    //POST /deal/delete
+    async deleteDeal(req, res){
+        let id = req.body.id;
+        let rs = await Deal.deleteOne({_id : id});
+        if(rs){
+            return res.status(200).json({success : "done"});
+        }
+        else{
+            res.status(500).json({error: "fail"});
+        }
     }
 }
 

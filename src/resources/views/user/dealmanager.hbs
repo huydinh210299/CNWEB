@@ -1,1 +1,55 @@
-<h1>Deal Manager</h1>
+<link rel="stylesheet" href="/css/deal-manager.css" />
+<div class="container mt-4">
+  <h1 class="text-success success mb-4" style="display: none;">Hoàn thành đơn hàng</h1>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">Loại</div>
+      <div class="col col-2">Tên</div>
+      <div class="col col-3">Giá đấu</div>
+      <div class="col col-4">Hành vi</div>
+    </li>
+    {{#each deal}}
+    <li class="table-row">
+      <div class="col col-1" data-label="Type">{{dealType this.type}}</div>
+      <div class="col col-2" data-label="Name">{{this.buyer.fullname}}</div>
+      <div class="col col-3" data-label="Cost">{{auctionPrice this.auction_price}}</div>
+      <div class="col col-4 d-flex justify-content-between" data-label="Action">
+        <a class="btn btn-primary" href="/user/info/{{this.buyer._id}}">
+          <i class="fas fa-info-circle mr-1"></i><span>Xem thông tin</span>
+        </a>
+        <button class="btn btn-success" data="{{this._id}}">
+          <i class="fas fa-user-check mr-1" style="pointer-events: none;"></i><span style="pointer-events: none;">Chấp
+            thuận</span>
+        </button>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<form id="form-manager" hidden>
+  <input class="product" name="product" value="{{productid}}" />
+</form>
+
+<script>
+  $(document).on('click', '.btn-success', async (e) => {
+    let el = e.target;
+    let deal = $(el).attr('data');
+    let product = $('.product').val();
+    const data = {
+      deal: deal,
+      product: product
+    }
+
+    var rs = await $.ajax({
+      type: "POST",
+      url: "/deal/manager",
+      contentType: "application/json",
+      data: JSON.stringify(data)
+    });
+    if (rs.success) {
+      $('.success').css('display', 'block');
+    }
+
+  })
+</script>

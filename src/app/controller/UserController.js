@@ -8,6 +8,7 @@ const area = require('../../util/tinhthanh');
 const maxAge = 3 * 24 * 60 * 60; //Thời gian sống của cookie
 const dirupload = path.join(__dirname, '..', '..', 'public', 'upload', 'avatar');
 const bcrypt = require('bcrypt');
+const { getAmount} = require('../../util/commonFunc');
 
 class UserController {
 
@@ -42,7 +43,7 @@ class UserController {
             res.status(201).json({ user: user._id });
             req.app.locals.login = true;
         } catch (error) {
-            res.status(400)({ error: "Tài khoản hoặc mật khẩu không đúng" });
+            res.status(400).json({ error: "Tài khoản hoặc mật khẩu không đúng" });
         }
     }
 
@@ -127,22 +128,20 @@ class UserController {
 
     //GET /user/getone get last
     async getone(req, res) {
-        // User.findOne().then(rs => {
-        //     res.json(toObject(rs));
-        // })
-        // .catch(err => console.log(err));
         var rs = await User.findOne().sort({ field: 'asc', _id: -1 }).limit(1);
         res.json(toObject(rs));
     }
 
     //GET /user/profile
-    profile(req, res) {
+    async profile(req, res) {
         let userID = userinfo(req);
+        const amount = await getAmount(req);
         User.findById(userID)
             .then(user =>
                 res.render("user/profile", {
                     user: toObject(user),
-                    area: area
+                    area: area,
+                    amount : amount
                 })
             )
             .catch(err => {
@@ -205,18 +204,50 @@ class UserController {
         }
     }
 
-    //GET /user/dashboard
-    dashboard(req, res) {
+    //POST /user/profile/updateava
+    updateava(req,res){
         let userID = userinfo(req);
+        let avata = {};
+        if (req.files) {
+            let ava = req.files.avata;
+            let filename = ava.name;
+            avata.avata = filename;
+            ava.mv(`${dirupload}/${filename}`, (err) => {
+                console.log(err);
+            });
+        };
+        User.findOneAndUpdate({_id : userID},avata,(err) => {
+            if(err) console.log(err);
+            else res.redirect('back');
+        })
+    }
+
+    //GET /user/dashboard
+    async dashboard(req, res) {
+        let userID = userinfo(req);
+        const amount = await getAmount(req);
         User.findById(userID)
             .then(user =>
                 res.render("user/dashboard", {
-                    user: toObject(user)
+                    user: toObject(user),
+                    amount : amount
                 })
             )
             .catch(err => {
                 console.log(err);
             })
+    }
+
+    //GET /user/info
+    info(req,res){
+        
+        User.findById(req.params.id)
+        .then(user =>
+            res.render('user/info',{
+                user : toObject(user)
+            })
+        )
+        .catch(err => console.log(err))
     }
 
 }

@@ -8,6 +8,8 @@ const port = 3000;
 const route = require('./routes');
 const db = require('./config/db');
 const helpers = require('./util/handlebarHelpers');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 //connect DB
 db.connect();
@@ -22,6 +24,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 //files upload
 app.use(fileUpload());
+//flash: redirect back with param
+app.use(flash());
+//session
+app.use(session({ cookie: { maxAge: 60000 }, 
+  secret: 'woot',
+  resave: false, 
+  saveUninitialized: false}));
+
 
 //biến local kiểm tra trạng thái đăng nhập
 app.locals.login = false;

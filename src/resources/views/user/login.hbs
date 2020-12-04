@@ -18,12 +18,13 @@
             <div class="col-md-6">
                 <div class="card">
                     <form class="box">
-                        <h1>Login</h1>
-                        <p class="text-muted"> Please enter your login and password!</p> 
-                        <input type="text" name="username" placeholder="Username" required> 
-                        <input type="password" name="password" placeholder="Password" required>
-                        <a class="forgot text-muted" href="/user/register">Dont have acount?
-                            Register?</a> <input type="submit" name="" value="Login" href="#">
+                        <p class="text-danger error" style="display: none;">Đăng nhập thất bại! Kiểm tra lại thông tin</p>
+                        <h1>Đăng nhập</h1>
+                        <p class="text-muted"> Điền tài khoản và mật khẩu của bạn!</p> 
+                        <input type="text" name="username" placeholder="Tài khoản" required> 
+                        <input type="password" name="password" placeholder="Mât khẩu" required>
+                        <a class="forgot text-muted" href="/user/register">Chưa có tài khoản?
+                            Đăng ký?</a> <input type="submit" name="" value="Đăng nhập" href="#">
                         <div class="col-md-12">
                             <ul class="social-network social-circle">
                                 <li><a href="#" class="icoFacebook" title="Facebook"><i
@@ -56,7 +57,7 @@
                     }
                 });
                 if (res.status == 400) {
-                    $('.err-msg').text("Đăng nhập thất bại. Kiểm tra lại thông tin");
+                    $('.error').show();
                 }
                 else {
                     window.location.replace("/");

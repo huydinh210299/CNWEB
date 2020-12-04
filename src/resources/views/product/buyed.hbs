@@ -4,12 +4,12 @@
     <div class="col-lg-10 mx-auto">
 
       <!-- List group-->
-      <ul class="list-group shadow">
+      <ul class="list-group">
 
         {{!-- product-item --}}
         {{#if product}}
         {{#each product}}
-        <li class="list-group-item">
+        <li class="shadow list-group-item mb-3">
           <div class="media align-items-lg-center flex-column flex-lg-row p-3">
             <div class="media-body order-2 order-lg-1">
               <h5 class="mt-0 font-weight-bold mb-2">{{this.product.name}}</h5>
@@ -27,7 +27,7 @@
             <img src="/upload/product/{{this.product.image.[0]}}" alt="Generic placeholder image" width="200"
               class="ml-lg-5 order-1 order-lg-2">
             <div class="status order-1 order-lg-2 ml-lg-5">
-              <button class="btn-delete btn btn-danger" {{{checkDealStatus this.result}}}>Hủy đơn</button>
+              <button class="btn-delete btn btn-danger" data="{{this._id}}" {{{checkDealStatus this.result}}}>Hủy đơn</button>
             </div>
           </div>
         </li>
@@ -65,5 +65,26 @@
     }
 
     $('#formUrDeal')[0].submit();
+  })
+
+  $(document).on('click','.btn-delete', async (e) => {
+    let el = e.target;
+    let id = $(el).attr('data');
+    const data = {
+      id : id
+    }
+    var rs = await $.ajax({
+        type: "POST",
+        url: "/deal/delete",
+        contentType: "application/json",
+        data: JSON.stringify(data)
+    });
+    if (rs.success) {
+        alert('Hủy thành công!');
+        window.location.reload();
+    }
+    else {
+        alert('Hủy thất bại!');
+    }
   })
 </script>

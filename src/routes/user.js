@@ -21,8 +21,12 @@ router.get('/profile',requireAuth, userController.profile);
 router.post('/profile/updateinfo',requireAuth,UserController.updateInfo);
 router.post('/profile/updatedes',requireAuth, UserController.updateDes);
 router.post('/profile/updatepass',requireAuth, UserController.updatePass);
+router.post('/profile/updateava',requireAuth, UserController.updateava);
 
 // dashboard
 router.get('/dashboard',requireAuth, userController.dashboard);
+
+//user info
+router.get('/info/:id',requireAuth, userController.info);
 
 module.exports = router;

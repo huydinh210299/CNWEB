@@ -4,28 +4,33 @@
     <div class="col-lg-10 mx-auto">
 
       <!-- List group-->
-      <ul class="list-group shadow">
+      <ul class="list-group">
 
         {{!-- product-item --}}
         {{#if product}}
         {{#each product}}
-          <li class="list-group-item">
-            <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-              <div class="media-body order-2 order-lg-1">
-                <h5 class="mt-0 font-weight-bold mb-2">{{this.name}}</h5>
-                <p class="font-italic text-muted mb-0 small">{{this.title}}</p>
-                <div class="d-flex align-items-center justify-content-between mt-1">
-                  <h6 class="font-weight-bold my-2">{{this.price}}</h6>
-                  <div class="amount h6">Số lượng : {{this.quantity}}</div>
-                </div>
-              </div><img src="/upload/product/{{this.image.[0]}}"
-                alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                <div class="contact ml-lg-5 order-1 order-lg-2">
-                  <p>Lượt tương tác: {{this.deal.length}}</p>
-                  <a href="/deal/manager" class="btn btn-success">Xem ngay</a>
-                </div>
+        <li class="shadow list-group-item mb-3">
+          <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-body order-2 order-lg-1">
+              <h5 class="mt-0 font-weight-bold mb-2">{{this.name}}</h5>
+              <p class="font-italic text-muted mb-0 small">{{this.title}}</p>
+              <div class="d-flex align-items-center justify-content-between mt-1">
+                <h6 class="font-weight-bold my-2">{{this.price}}</h6>
+                <div class="amount h6">Số lượng : {{this.quantity}}</div>
+              </div>
+            </div><img src="/upload/product/{{this.image.[0]}}" alt="Generic placeholder image" width="200"
+              class="ml-lg-5 order-1 order-lg-2">
+            <div class="contact ml-lg-5 order-1 order-lg-2">
+              <p>Lượt tương tác: {{this.deal.length}}</p>
+              <a href="/deal/manager/{{this._id}}" class="btn btn-success">Xem ngay</a>
             </div>
-          </li>
+            <div class="contact ml-lg-5 order-1 order-lg-2 d-flex flex-column justify-content-around"
+              style="height: 100px;">
+              <a class="btn btn-primary" href="/product/edit/{{this._id}}">Sửa tt</a>
+              <button class="btn btn-danger btn-delete" data="{{this._id}}">Xóa</button>
+            </div>
+          </div>
+        </li>
         {{/each}}
         {{else}}
         <h1 class="text-center text-danger">Không có sản phẩm nào</h1>
@@ -38,8 +43,8 @@
 
 {{!-- form thực hiển chuyển trang --}}
 <form id="formUrProduct" action="/product/onsale" method="POST" hidden>
-    <input name="page" class="page" value="{{page}}"/>
-    <input name="completed" class="completed" value="{{completed}}"/>
+  <input name="page" class="page" value="{{page}}" />
+  <input name="completed" class="completed" value="{{completed}}" />
 </form>
 
 <ul class="pagination justify-content-center mt-5">
@@ -49,18 +54,45 @@
 
 <script>
 
-  $(document).on('click','.page-link', (e) => {
+  $(document).on('click', '.page-link', (e) => {
     let el = e.target;
     let action = $(el).attr('action-type');
     let page = $('.page').val();
     page = parseInt(page);
-    if(action == "sub"){
+    if (action == "sub") {
       $('.page').val(--page);
     }
-    if(action == "add"){
+    if (action == "add") {
       $('.page').val(++page);
     }
 
     $('#formUrProduct')[0].submit();
+  });
+
+
+  $(document).on('click', '.btn-delete', async (e) => {
+    let el = e.target;
+    let productID = $(el).attr('data');
+    debugger
+    var r = confirm("Bạn chắc chắn muốn xóa sản phẩm!");
+    if (r == true) {
+      let data = {
+        id: productID
+      }
+      let rs = await $.ajax({
+        type: "POST",
+        url: "/product/delete",
+        contentType: "application/json",
+        data: JSON.stringify(data)
+      });
+      if (rs.success) {
+        alert('Xóa sản phẩm thành công');
+        window.location.reload();
+      }
+      else {
+        alert('Xóa sản phẩm thất bại! Kiểm tra lại');
+        window.location.reload();
+      }
+    }
   })
 </script>

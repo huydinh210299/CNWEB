@@ -3,23 +3,26 @@
     <div class="wrapper wrapper--w900">
         <div class="card card-6" style="border: none;">
             {{#if success}}
-            <h3 class="success text-success">Cập nhật thành công</h3>
+                <h3 class="success text-success">Thêm sản phẩm thành công</h3>
             {{/if}}
             {{#if error}}
-            <h3 class="success text-danger">Cập nhật thất bại mởi kiểm tra lại!</h3>
+                <h3 class="success text-danger">Thêm sản phẩm thất bại mời kiểm tra lại!</h3>
             {{/if}}
             <div class="card-heading">
-                <h2 class="title">Thêm sản phẩm</h2>
+                <h2 class="title">Sửa thông tin sản phẩm</h2>
             </div>
             <div class="card-body">
-                <form action="/product/create" method="POST" class="form-create" id="form-create"
-                    enctype="multipart/form-data">
+                <h1 class="text-success form-row success" style="display: none;">Sửa thông tin thành công</h1>
+                <h1 class="text-danger form-row error" style="display: none;">Sửa thông tin thất bại</h1>
+                <form class="form-update" id="form-update"  method="POST" action="/product/edit" enctype="multipart/form-data">
+                <input name="id" class="id" value="{{product._id}}" hidden/>
                     <div class="form-row">
                         <div class="name">Thể loại</div>
                         <div class="value">
-                            <select name="category" id="category" class="input--style-6" style="height: 40px;">
+                            <select name="category" class="category input--style-6" id="category" style="height: 40px;">
                                 {{#each category}}
-                                <option value="{{this._id}}">{{this.name}}</option>
+                                <option value="{{this._id}}" {{{isSelected this._id ../product.category}}}>{{this.name}}
+                                </option>
                                 {{/each}}
                             </select>
                         </div>
@@ -27,15 +30,23 @@
                     <div class="form-row">
                         <div class="name">Tên sản phẩm</div>
                         <div class="value">
-                            <input class="input--style-6" type="text" name="name">
+                            <input class="input--style-6" type="text" name="name" class="name" value="{{product.name}}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="name">Giá</div>
                         <div class="value">
                             <div class="input-group">
-                                <input class="input--style-6" type="text" name="price">
+                                <input class="input--style-6" type="text" class="price" name="price" value="{{product.price}}">
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Ảnh đang sử dụng</div>
+                        <div class="value list-image d-flex">
+                            {{#each product.image}}
+                            <img src="/upload/product/{{this}}" height="100" style="width: 18%;margin: 1%;" />
+                            {{/each}}
                         </div>
                     </div>
                     <div class="form-row">
@@ -46,7 +57,7 @@
                                         padding: 70px 0;
                                         border: 4px dashed #000;
                                         text-align: center;">Chưa upload file nào.Upload tối đa 5 ảnh</label>
-                            <input type="file" id="image" name="image" multiple style="position: absolute;
+                            <input type="file" id="image" name="image" class="image" multiple style="position: absolute;
                                         top: 0;
                                         bottom: 0;
                                         left: 0;
@@ -58,7 +69,8 @@
                         <div class="name">Số lượng</div>
                         <div class="value">
                             <div class="input-group">
-                                <input type="number" class="input--style-6" name="quantity" />
+                                <input type="number" class="input--style-6" name="quantity" class="quantity"
+                                    value="{{product.quantity}}" />
                             </div>
                         </div>
                     </div>
@@ -66,7 +78,7 @@
                         <div class="name">Tiêu đề</div>
                         <div class="value">
                             <div class="input-group">
-                                <input type="text" class="input--style-6" name="title" />
+                                <input type="text" class="input--style-6" class="title" name="title" value="{{product.title}}" />
                             </div>
                         </div>
                     </div>
@@ -74,19 +86,23 @@
                         <div class="name">Miêu tả</div>
                         <div class="value">
                             <div class="input-group">
-                                <textarea class="textarea--style-6" name="description"
-                                    placeholder="Miêu tả của sản phẩm"></textarea>
+                                <textarea class="textarea--style-6" name="description" class="description"
+                                    placeholder="Miêu tả của sản phẩm">{{product.description}}</textarea>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-footer d-flex justify-content-center">
-                <button class="btn btn--radius-2 btn--blue-2 btn-submit" type="submit">Thêm sản phẩm</button>
+                <button class="btn btn--radius-2 btn--blue-2 btn-submit" type="submit">Sửa thông tin</button>
             </div>
         </div>
     </div>
 </div>
+
+<form hidden>
+    <input class="productid" value="{{product.id}}" />
+</form>
 
 <script>
     $(document).ready(function () {
@@ -94,19 +110,20 @@
             $('.label-img').text(this.files.length + " file(s) selected");
         });
     });
-    $(document).on('click', '.btn-submit', () => {
-        $('.form-create')[0].submit();
+
+    $(document).on('click','.btn-submit',() => {
+        $('#form-update')[0].submit();
     })
 
-    //sự kiện submit
-    $(document).on('submit', '#form-create', (e) => {
+    $(document).on('submit','#form-update', (e) => {
         e.preventDefault();
         var input = document.getElementById('image');
-        if (input.files.length > 5) {
+        if(input.files.length > 5){
             alert('Số file upload tối đa là 5');
         }
-        else {
-            $('#form-create')[0].submit();
+        else{
+            $('#form-update')[0].submit();
         }
     })
+
 </script>

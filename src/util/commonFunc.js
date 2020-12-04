@@ -115,4 +115,32 @@ const getCategory = async (req) => {
     }
 }
 
-module.exports = { getUrProduct, getUrDeal, getCategory, searchProduct };
+//Hàm lấy thông tin số lượng các sản phẩm
+const getAmount = async (req) => {
+    let userID = userinfo(req);
+    let sold = await Product.find({
+        user : userID,
+        completed : true
+    }).count();
+    let onsale = await Product.find({
+        user : userID,
+        completed : false
+    }).count();
+    let buyed = await Deal.find({
+        buyer : userID,
+        type: false
+    }).count();
+    let bid = await Deal.find({
+        buyer : userID,
+        type: true
+    }).count();
+    const data = {
+        sold : sold,
+        onsale : onsale,
+        buyed: buyed,
+        bid : bid
+    }
+    return data;
+}
+
+module.exports = { getUrProduct, getUrDeal, getCategory, searchProduct, getAmount};

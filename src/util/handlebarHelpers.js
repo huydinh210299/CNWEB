@@ -9,7 +9,7 @@ const helpers = {
       return options.inverse(this);
     },
     isSelected: function (a, b) {
-      return a === b ? 'selected' : ''; 
+      return (a && b && (a === b || a.toString() == b.toString())) ? 'selected' : ''; 
     },
     isActive: function (a){
       return a === 0 ? 'active' : '';
@@ -38,6 +38,7 @@ const helpers = {
       //Nếu trang hiện tại đang là 1;
       return a == "1" ? "disabled" : "";
     },
+    //render giá đấu
     highestDeal: function(array,options){
       if(array.length == 0) return "Chưa có"
       else{
@@ -45,6 +46,13 @@ const helpers = {
         if(maxValueOfY) return maxValueOfY + "Đ";
         return "Chưa có";
       }
+    },
+    //trả về loại của deal: mua, đấu giá
+    dealType: function(a, options){
+      return a ? "Đấu giá" : "Mua";
+    },
+    auctionPrice: function(a, options){
+      return a ? a + "Đ": "";
     }
   }
 

@@ -1,0 +1,23 @@
+<div class="container mt-5" style="width: 800px !important;">
+    <div class="row bg-light p-3">
+        <div class="col-xs-12 col-sm-8">
+            <h2 style="font-family: cursive;">{{user.fullname}}</h2>
+            <p><strong>Vai trò: </strong> Thành viên. </p>
+            <p><strong>Khu vực: </strong>{{user.area}}</p>
+            <p><strong>Địa chỉ: </strong>{{user.address}}</p>
+            <p><strong>Số điện thoại: </strong>{{user.phone}}</p>
+            <p><strong>Email: </strong>{{user.email}}</p>
+        </div>
+        <div class="col-xs-12 col-sm-4 text-center">
+            <figure>
+                {{#if user.avata}}
+                <img src="/upload/avatar/{{user.avata}}" alt="" class="img-circle img-responsive mx-auto" width="192"
+                    height="192">
+                {{else}}
+                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt=""
+                    class="img-circle img-responsive mx-auto">
+                {{/if}}
+            </figure>
+        </div>
+    </div>
+</div>
