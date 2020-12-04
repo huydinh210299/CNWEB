@@ -52,16 +52,25 @@ class ProductController {
         let userID = userinfo(req);
         if (req.files.image) {
             const arr = req.files.image;
-            const amount = arr.length;
-            for (let i = 0; i < amount; i++) {
-                images.push(arr[i]['name']);
+            if(Array.isArray(arr)){
+                const amount = arr.length;
+                for (let i = 0; i < amount; i++) {
+                    images.push(arr[i]['name']);
+                }
+                arr.forEach((item, index) => {
+                    let filename = item.name;
+                    item.mv(`${dirupload}/${filename}`, (err) => {
+                        console.log(err);
+                    });
+                })
             }
-            arr.forEach((item, index) => {
-                let filename = item.name;
-                item.mv(`${dirupload}/${filename}`, (err) => {
+            else{
+                let filename = arr.name;
+                images.push(filename);
+                arr.mv(`${dirupload}/${filename}`, (err) => {
                     console.log(err);
                 });
-            })
+            }
         };
         Product.create({
             name: req.body.name,

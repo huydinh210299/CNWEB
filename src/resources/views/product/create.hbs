@@ -105,6 +105,9 @@
         if (input.files.length > 5) {
             alert('Số file upload tối đa là 5');
         }
+        else if(input.files.length == 0){
+            alert("Chưa chọn ảnh sản phẩm");
+        }
         else {
             $('#form-create')[0].submit();
         }
