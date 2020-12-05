@@ -194,16 +194,25 @@ class ProductController {
         let images = [];
         if (req.files) {
             const arr = req.files.image;
-            const amount = arr.length;
-            for (let i = 0; i < amount; i++) {
-                images.push(arr[i]['name']);
+            if(Array.isArray(arr)){
+                const amount = arr.length;
+                for (let i = 0; i < amount; i++) {
+                    images.push(arr[i]['name']);
+                }
+                arr.forEach((item, index) => {
+                    let filename = item.name;
+                    item.mv(`${dirupload}/${filename}`, (err) => {
+                        console.log(err);
+                    });
+                })
             }
-            arr.forEach((item, index) => {
-                let filename = item.name;
-                item.mv(`${dirupload}/${filename}`, (err) => {
+            else{
+                let filename = arr.name;
+                images.push(filename);
+                arr.mv(`${dirupload}/${filename}`, (err) => {
                     console.log(err);
                 });
-            })
+            }
         };
         let objUpdate = {
             name: req.body.name,

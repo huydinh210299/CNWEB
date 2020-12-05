@@ -35,7 +35,7 @@
             <p class="address">Địa chỉ bán: {{product.user.address}}</p>
             <p class="quantity">Số lượng: {{product.quantity}}</p>
           </div>
-          <form action="">
+          <form id="form-aution">
             <div class="form-group form-group-lg">
               <label class="display-3" for="auction_price">Đấu giá</label>
               <input type="text" name="auction_price" id="auction_price" class="form-control auction_price"
@@ -90,5 +90,9 @@
         alert(rs.error);
       }
     }
+  });
+
+  $(document).on('submit','#form-aution', (e) => {
+    e.preventDefault();
   })
 </script>
